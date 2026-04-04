@@ -18,4 +18,10 @@ func NewItemIngredient(IngredientID string, quantity float64) (ItemIngredient, e
 	return ItemIngredient{ingredientID: IngredientID, quantity: quantity}, nil
 }
 
-func ()
+func (i *ItemIngredient) IngredientID() string {
+	return i.ingredientID
+}
+
+func (i *ItemIngredient) Quantity() float64 {
+	return i.quantity
+}

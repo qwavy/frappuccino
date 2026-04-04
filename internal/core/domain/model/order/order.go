@@ -5,13 +5,6 @@ import (
 	"time"
 )
 
-type Status string
-
-const (
-	StatusOpened Status = "opened"
-	StatusClosed Status = "closed"
-)
-
 var (
 	ErrOrderClosed = errors.New("order already closed")
 )
@@ -34,6 +27,16 @@ func NewOrder(id string, customerName string, items []Item, status Status) (*Ord
 		status:       StatusOpened,
 		createdAt:    now,
 	}, nil
+}
+
+func RestoreOrder(id string, customerName string, items []Item, status Status, createdAt time.Time) *Order {
+	return &Order{
+		id:           id,
+		customerName: customerName,
+		items:        items,
+		status:       status,
+		createdAt:    createdAt,
+	}
 }
 
 func (o *Order) ID() string {

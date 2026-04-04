@@ -36,6 +36,28 @@ func NewMenuItem(
 	}, nil
 }
 
+func RestoreMenuItem(id int,
+	name string,
+	description string,
+	price float64,
+	itemSize string,
+	allergens []string,
+	categories []string,
+	customization string,
+	ingredients []ItemIngredient) *Item {
+	return &Item{
+		id:            id,
+		name:          name,
+		description:   description,
+		price:         price,
+		itemSize:      itemSize,
+		allergens:     allergens,
+		categories:    categories,
+		customization: customization,
+		ingredients:   ingredients,
+	}
+}
+
 func (i *Item) Id() int {
 	return i.id
 }

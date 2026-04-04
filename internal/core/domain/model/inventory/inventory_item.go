@@ -33,6 +33,40 @@ func NewInventoryItem(ingredientID int, name string, quantity float64, unit stri
 	}, nil
 }
 
+func RestoreInventoryItem(ingredientID int, name string, quantity float64, unit Unit, price float64, created time.Time, updated time.Time) *Item {
+	return &Item{
+		ingredientID: ingredientID,
+		name:         name,
+		quantity:     quantity,
+		unit:         unit,
+		price:        price,
+		created:      created,
+		updated:      updated,
+	}
+}
+
+func (i *Item) IngredientID() int {
+	return i.ingredientID
+}
+func (i *Item) Name() string {
+	return i.name
+}
+func (i *Item) Quantity() float64 {
+	return i.quantity
+}
+func (i *Item) Unit() Unit {
+	return i.unit
+}
+func (i *Item) Price() float64 {
+	return i.price
+}
+func (i *Item) Created() time.Time {
+	return i.created
+}
+func (i *Item) Updated() time.Time {
+	return i.updated
+}
+
 func (i *Item) Update(name string, quantity float64, unit Unit, price float64) {
 	now := time.Now().UTC()
 

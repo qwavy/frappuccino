@@ -52,7 +52,7 @@ Implement the application using a **three-layered architecture**:
 Before coding, design an ERD based on the core entities. The schema must utilize the following specific PostgreSQL data types:
 * **JSONB:** e.g., customization options, special instructions.
 * **Arrays:** e.g., tags, allergens.
-* **ENUM:** e.g., order statuses (`open`, `closed`, `rejected`), item sizes.
+* **ENUM:** e.g., order statuses (`open`, `closed`, `rejected`), itemDTO sizes.
 * **Timestamp with time zone:** e.g., order dates, inventory update logs.
 
 ### 2. Core Tables
@@ -63,7 +63,7 @@ Your database must include at least the following tables, properly related via F
 * `menu_item_ingredients`: Recipe junction (menu items <-> ingredients).
 * `inventory`: Tracks available ingredients, units, and stock levels.
 * `order_status_history`: Tracks order state changes over time.
-* `price_history`: Tracks menu item price changes.
+* `price_history`: Tracks menu itemDTO price changes.
 * `inventory_transactions`: Records all inventory movements (usage, restock).
 
 ### 3. Initialization (`init.sql`)
@@ -116,7 +116,7 @@ All data MUST be returned and accepted in JSON format. Use standard HTTP status 
 **6. Bulk Order Processing**
 * `POST /orders/batch-process`
 * Processes an array of multiple orders simultaneously.
-* **Crucial:** Must handle concurrent operations and maintain data integrity using **SQL Transactions**. If one item in a bulk order fails due to inventory, handle the rejection cleanly without crashing the accepted orders.
+* **Crucial:** Must handle concurrent operations and maintain data integrity using **SQL Transactions**. If one itemDTO in a bulk order fails due to inventory, handle the rejection cleanly without crashing the accepted orders.
 
 ---
 
