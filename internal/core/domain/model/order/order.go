@@ -69,3 +69,13 @@ func (o *Order) Close() error {
 
 	return nil
 }
+
+func (o *Order) SetCustomerName(newName string) error {
+	if newName == "" {
+		return errors.New("new customer name cant be empty")
+	}
+
+	o.customerName = newName
+
+	return nil
+}

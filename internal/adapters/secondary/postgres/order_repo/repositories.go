@@ -43,7 +43,7 @@ func (r *orderRepository) GetAll(ctx context.Context) ([]*order.Order, error) {
 }
 
 func (r *orderRepository) GetById(ctx context.Context, id string) (*order.Order, error) {
-	row := r.db.QueryRow(ctx, `SELECT id, customerName, items, status, createdAt FROM order WHERE id = $1`, string)
+	row := r.db.QueryRow(ctx, `SELECT id, customerName, items, status, createdAt FROM order WHERE id = $1`, id)
 
 	var orderDTO OrderDTO
 	err := row.Scan(&orderDTO.Id, &orderDTO.CustomerName, &orderDTO.Items, &orderDTO.Status, &orderDTO.CreatedAt)

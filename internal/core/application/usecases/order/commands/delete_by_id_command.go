@@ -8,12 +8,10 @@ type DeleteByIdCommand struct {
 
 func NewDeleteByIdCommand(id string) (DeleteByIdCommand, error) {
 	if id == "" {
-		return DeleteByIdCommand{}, errors.New("id not provided")
+		return DeleteByIdCommand{}, errors.New("id is not provided")
 	}
 
-	return DeleteByIdCommand{
-		id: id,
-	}, nil
+	return DeleteByIdCommand{id: id}, nil
 }
 
 func (c DeleteByIdCommand) Id() string {

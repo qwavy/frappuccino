@@ -11,11 +11,5 @@ func NewGetByIdQuery(id string) (GetByIdQuery, error) {
 		return GetByIdQuery{}, errors.New("id is required")
 	}
 
-	return GetByIdQuery{
-		id: id,
-	}, nil
-}
-
-func (q GetByIdQuery) Id() string {
-	return q.id
+	return GetByIdQuery{}, nil
 }
