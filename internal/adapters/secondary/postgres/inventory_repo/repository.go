@@ -16,35 +16,6 @@ func NewInventoryRepository(db *pgxpool.Pool) ports.InventoryRepository {
 	return &inventoryRepository{db: db}
 }
 
-func (r *inventoryRepository) GetAll(ctx context.Context) ([]*inventory.Item, error) {
-	rows, err := r.db.Query(ctx, `SELECT ingredient_id, name, quantity, unit, price, created, updated FROM inventory`)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var items []*inventory.Item
-
-	for rows.Next() {
-		var itemDTO InventoryItemDTO
-		err = rows.Scan(&itemDTO.IngredientID, &itemDTO.Name, &itemDTO.Quantity, &itemDTO.Unit, &itemDTO.Price, &itemDTO.Created, &itemDTO.Updated)
-
-		if err != nil {
-			return nil, err
-		}
-
-		items = append(items, DTOtoDomain(itemDTO))
-	}
-
-	err = rows.Err()
-
-	if err != nil {
-		return nil, err
-	}
-
-	return items, nil
-}
-
 func (r *inventoryRepository) GetById(ctx context.Context, id string) (*inventory.Item, error) {
 	rows := r.db.QueryRow(ctx, `SELECT ingredient_id, name, quantity, unit, price, created, updated FROM inventory WHERE ingredient_id = $1`, id)
 

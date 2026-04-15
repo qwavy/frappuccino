@@ -16,34 +16,6 @@ func NewMenuRepository(db *pgxpool.Pool) ports.MenuRepository {
 	return &menuRepository{db: db}
 }
 
-func (r *menuRepository) GetAll(ctx context.Context) ([]*menu.Item, error) {
-	rows, err := r.db.Query(ctx, `SELECT id, name, description, price, itemSize, allergens, categories, customization, ingredients from menu`)
-
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	var menuItems []*menu.Item
-
-	for rows.Next() {
-		var menuItemDTO MenuItemDTO
-		err = rows.Scan(&menuItemDTO.Id, &menuItemDTO.Name, &menuItemDTO.Description, &menuItemDTO.Price, &menuItemDTO.ItemSize, &menuItemDTO.Allergens, &menuItemDTO.Categories, &menuItemDTO.Customization, &menuItemDTO.Ingredients)
-		if err != nil {
-			return nil, err
-		}
-
-		menuItems = append(menuItems, DTOtoDomain(menuItemDTO))
-	}
-
-	err = rows.Err()
-
-	if err != nil {
-		return nil, err
-	}
-
-	return menuItems, nil
-}
 func (r *menuRepository) GetById(ctx context.Context, id string) (*menu.Item, error) {
 	rows := r.db.QueryRow(ctx, `SELECT id, name, description, price, itemSize, allergens, categories, customization, ingredients from menu WHERE id = $1`, id)
 

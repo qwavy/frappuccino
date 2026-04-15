@@ -6,7 +6,6 @@ import (
 )
 
 type OrderRepository interface {
-	GetAll(ctx context.Context) ([]*order.Order, error)
 	GetById(ctx context.Context, id string) (*order.Order, error)
 	Create(ctx context.Context, menuItem *order.Order) error
 	DeleteById(ctx context.Context, id string) error

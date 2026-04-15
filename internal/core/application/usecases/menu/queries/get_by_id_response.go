@@ -9,10 +9,10 @@ type GetByIdResponse struct {
 	Allergens     []string
 	Categories    []string
 	Customization string
-	Ingredients   []ItemIngredient
+	Ingredients   []GetByIdItemIngredient
 }
 
-type ItemIngredient struct {
+type GetByIdItemIngredient struct {
 	IngredientID string
 	Quantity     float64
 }

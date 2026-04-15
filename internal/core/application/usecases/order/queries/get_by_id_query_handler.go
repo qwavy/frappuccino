@@ -23,5 +23,13 @@ func NewGetByIdQueryHandler(db *pgxpool.Pool) (GetByIdQueryHandler, error) {
 }
 
 func (q *getByIdQueryHandler) Handle(ctx context.Context, query GetByIdQuery) (GetByIdResponse, error) {
+	row := q.db.QueryRow(ctx, `SELECT id, customerName, items, status, createdAt FROM order WHERE id = $1`, query.id)
 
+	var orderDTO GetByIdResponse
+	err := row.Scan(&orderDTO.Id, &orderDTO.CustomerName, &orderDTO.Items, &orderDTO.Status, &orderDTO.CreatedAt)
+	if err != nil {
+		return GetByIdResponse{}, err
+	}
+
+	return orderDTO, nil
 }

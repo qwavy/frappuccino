@@ -32,7 +32,7 @@ func (q *getAllQueryHandler) Handle(ctx context.Context, query GetAllQuery) (Get
 	var menuItems GetAllResponse
 
 	for rows.Next() {
-		var menuItemDTO Item
+		var menuItemDTO GetAllItem
 		err = rows.Scan(&menuItemDTO.Id, &menuItemDTO.Name, &menuItemDTO.Description, &menuItemDTO.Price, &menuItemDTO.ItemSize, &menuItemDTO.Allergens, &menuItemDTO.Categories, &menuItemDTO.Customization, &menuItemDTO.Ingredients)
 		if err != nil {
 			return GetAllResponse{}, err

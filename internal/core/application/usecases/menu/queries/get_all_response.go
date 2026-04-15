@@ -1,6 +1,6 @@
 package queries
 
-type Item struct {
+type GetAllItem struct {
 	Id            int
 	Name          string
 	Description   string
@@ -12,11 +12,11 @@ type Item struct {
 	Ingredients   []ItemIngredient
 }
 
-type ItemIngredient struct {
+type GetAllItemIngredient struct {
 	IngredientID string
 	Quantity     float64
 }
 
 type GetAllResponse struct {
-	MenuItems []Item
+	MenuItems []GetAllItem
 }
